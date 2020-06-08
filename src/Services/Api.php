@@ -60,11 +60,9 @@ class Api
                 'response' => $contents
             ];
 
-            dd($contents);
             return $response;
 
         } catch (ClientException $e) {
-            dd(123);
             $content = $e->getResponse()->getBody()->getContents();
             $response = [
                 'status' => $e->getResponse()->getStatusCode(),
