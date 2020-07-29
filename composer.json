@@ -1,60 +1,38 @@
 {
-    "name": "geekhives/qc_payment",
-    "description": "QC Payment Services API",
+    "name": "geekhives/package-qc-lgu",
+    "description": "QC LGU Package",
+    "require": {
+        "php": "^7.3",
+        "ext-json": "^1.7",
+        "ext-curl": "^7.3",
+        "illuminate/support": "^7.22"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^5.3",
+        "phpunit/phpunit": "^9.2"
+    },
     "authors": [
         {
-            "name": "kentkatou",
-            "email": "kvllkatou@multisyscorp.com"
+            "name": "Gerhard",
+            "email": "ggdeocampo@multisyscorp.com"
         }
     ],
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
-            "Geekhives\\QcLgu\\": "src/"
+          "Geekhives\\Qclgu\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Geekhives\\Qclgu\\Tests\\": "tests/"
         }
-    },
-    "minimum-stability": "dev",
-    "require": {
-        "php": "^7.2.5",
-        "fideloper/proxy": "^4.2",
-        "fruitcake/laravel-cors": "^1.0",
-        "guzzlehttp/guzzle": "^6.3",
-        "laravel/framework": "5.6.*",
-        "laravel/tinker": "^1.0"
-    },
-    "require-dev": {
-        "facade/ignition": "^2.0",
-        "fzaninotto/faker": "^1.9.1",
-        "mockery/mockery": "^1.3.1",
-        "nunomaduro/collision": "^4.1",
-        "phpunit/phpunit": "^8.5"
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
+    }, 
     "extra": {
         "laravel": {
-            "dont-discover": []
+          "providers": [
+            "Geekhives\\Qclgu\\ServiceProvider"
+          ]
         }
-    },
-    "prefer-stable": true,
-    "scripts": {
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
-        ]
     }
 }

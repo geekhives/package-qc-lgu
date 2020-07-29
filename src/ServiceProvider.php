@@ -1,21 +1,27 @@
 <?php
 
-namespace Geekhives\QcLgu;
+namespace Geekhives\Qclgu;
 
-class ServiceProvider extends \Illuminate\Support\ServiceProvider
+use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Support\ServiceProvider as ServiceProviderHandler;
+
+class ServiceProvider extends ServiceProviderHandler
 {
     /**
      * Perform post-registration booting of services.
      *
+     * @param Kernel $kernel
      * @return void
      */
-    public function boot()
+    public function boot(Kernel $kernel)
     {
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
-        $this->publishes(
-            [
-                __DIR__ . '/config/package_qc_lgu.php' => config_path('package_qc_lgu.php'),
-            ], 'qc_lgu'
-        );
+        $this->publishes([
+            dirname(__DIR__) . '/config' => config_path()
+        ], 'package_qc_lgu');
+    }
+
+    public function register()
+    {
+
     }
 }
