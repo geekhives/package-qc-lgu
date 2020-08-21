@@ -16,7 +16,7 @@ class ServiceProvider extends ServiceProviderHandler
     public function boot(Kernel $kernel)
     {
         $this->publishes([
-            dirname(__DIR__) . '/config' => config_path()
+            dirname(__DIR__) . '/src/config' => config_path()
         ], 'package_qc_lgu');
     }
 

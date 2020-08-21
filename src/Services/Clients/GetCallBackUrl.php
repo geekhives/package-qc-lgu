@@ -4,8 +4,9 @@ namespace Geekhives\Qclgu\Services\Clients;
 use Geekhives\Qclgu\Services\Base\BaseRepository;
 use Geekhives\Qclgu\Services\Helpers\CurlRequestTrait;
 use Geekhives\Qclgu\Services\Clients\Exceptions\CreateTokenException;
+use Geekhives\Qclgu\Services\Clients\Exceptions\GetCallBackUrlException;
 
-class CreateToken extends BaseRepository
+class GetCallBackUrl extends BaseRepository
 {
     use CurlRequestTrait;
     /**
@@ -17,7 +18,7 @@ class CreateToken extends BaseRepository
         if (!config('package_qc_lgu.base_url')) {
             throw new CreateTokenException('Config base url not set.');
         }
-        $this->resource = 'create_token';
+        $this->resource = 'get_call_back_url';
     }
     /**
      * Send the cashin to partner
@@ -43,7 +44,7 @@ class CreateToken extends BaseRepository
                 ]
             );
         } catch (\Throwable $e) {
-            throw new CreateTokenException($e->getMessage());
+            throw new GetCallBackUrlException($e->getMessage());
         }
 
         return $response;

@@ -1,7 +1,8 @@
 <?php
-namespace Geekhives\Cimb\Services\Helpers;
+namespace Geekhives\Qclgu\Services\Helpers;
 
 use Exception;
+use GuzzleHttp\Client;
 
 trait CurlRequestTrait
 {
@@ -18,7 +19,7 @@ trait CurlRequestTrait
      *
      * @throws Exception
      */
-    public function sendRequest($baseUrl, $method, $data = null, $headers = array()) : array
+    public function sendRequest($baseUrl, $method, $data = null, $headers = array())
     {
         $curl = curl_init();
         $opts = [
@@ -43,5 +44,53 @@ trait CurlRequestTrait
         } else {
             return json_decode($response, true);
         }
+    }
+
+    /**
+     * Send the request
+     *
+     * @param $baseUrl
+     * @param $method
+     * @param array   $headers
+     * @param array   $data
+     *
+     * @return array
+     *
+     * @throws Exception
+     */
+    public function curl($baseUrl, $method, $data = null, $headers = array())
+    {
+        $client = new Client(
+            [
+                'curl' => array( CURLOPT_SSL_VERIFYPEER => false, CURLOPT_SSL_VERIFYHOST => false),
+            ]
+        );
+
+        try {
+            $response = $client->request($method, $baseUrl, [
+                'headers' => $headers,
+                'json' => $data
+            ]);
+
+            $contnents = $response->getBody()->getContents();
+            
+            return $contnents;
+        } catch (\Exception $ex) {
+            if ($ex instanceof ConnectException) {
+                throw $ex;
+            }
+
+            if ($ex instanceof ClientException) {
+                if ($contnents = $ex->getResponse()->getBody()->getContents()){
+                    $contnents = json_decode($contnents);
+                    throw new Exception("[{$contnents->TxnStatus->ReplyCode}] {$contnents->TxnStatus->ReplyText}");
+                }
+                $response = $ex->getResponse();
+                throw new Exception("[{$response->getStatusCode()}] {$response->getReasonPhrase()}");
+            } 
+
+            $message = $ex->getMessage();
+            throw new Exception("{$ex->getCode()} - {$ex->getMessage()}");
+        }    
     }
 }

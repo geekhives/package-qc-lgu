@@ -1,33 +1,30 @@
 {
     "name": "geekhives/package-qc-lgu",
     "description": "QC LGU Package",
-    "require": {
-        "php": "^7.3",
-        "ext-json": "^1.7",
-        "ext-curl": "^7.3",
-        "illuminate/support": "^7.22"
-    },
-    "require-dev": {
-        "orchestra/testbench": "^5.3",
-        "phpunit/phpunit": "^9.2"
-    },
+    "license": "MIT",
     "authors": [
         {
             "name": "Gerhard",
             "email": "ggdeocampo@multisyscorp.com"
         }
     ],
+    "require": {
+        "php": "^7.1",
+        "ext-json": "^1.5",
+        "ext-curl": "^7.1",
+        "illuminate/support": "^5.8|^6.0|^7.0"
+    },
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
           "Geekhives\\Qclgu\\": "src/"
         }
     },
-    "autoload-dev": {
+   "autoload-dev": {
         "psr-4": {
             "Geekhives\\Qclgu\\Tests\\": "tests/"
         }
-    }, 
+    },  
     "extra": {
         "laravel": {
           "providers": [
