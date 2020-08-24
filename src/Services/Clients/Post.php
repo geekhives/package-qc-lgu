@@ -32,7 +32,7 @@ class Post extends BaseRepository
     public function post($referenceNo, $amountPaid, $transactionPate)
     {
         $accessToken = $this->getAccessToken();
-
+        // $response =  '{"reference_number":"A0-09CB8-00001","status_code":"D0","status_message":"Payment: Successful."}';
         try {
             $response = $this->curl(
                 $this->buildUrl . $this->resource,
@@ -66,9 +66,8 @@ class Post extends BaseRepository
     private function parseResponse($response)
     {
         $response = json_decode($response);
-        
-        if (isset($response->data->status_code)) {
-            throw new PostException("[{$response->data->status_code}] {$response->data->status_message}");
+        if (in_array($response->status_code, ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9'])) {
+            throw new PostException("[{$response->status_code}] {$response->status_message}");
         }
         
         return $response;

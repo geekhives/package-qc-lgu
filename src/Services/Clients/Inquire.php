@@ -30,7 +30,8 @@ class Inquire extends BaseRepository
     public function post($referenceNo)
     {
         $accessToken = $this->getAccessToken();
-
+        // $response ='{"reference_number":"A0-09CB8-00001","status_code":"A0","status_message":"Ongoing","amount_to_pay":"3469.1"}';
+        
         try {
             $response = $this->curl(
                 $this->buildUrl . $this->resource,
@@ -46,6 +47,7 @@ class Inquire extends BaseRepository
         } catch (\Throwable $e) {
             throw new InquireException($e->getMessage());
         }
+          
         return $this->parseResponse($response);
         return $response;
     }
@@ -61,10 +63,11 @@ class Inquire extends BaseRepository
 
     private function parseResponse($response)
     {
+        
         $response = json_decode($response);
         
-        if (isset($response->data->status_code)) {
-            throw new InquireException("[{$response->data->status_code}] {$response->data->status_message}");
+        if (in_array($response->status_code, ['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7'])) {
+            throw new InquireException("[{$response->status_code}] {$response->status_message}");
         }
         
         return $response;

@@ -47,6 +47,17 @@ class GetCallBackUrl extends BaseRepository
             throw new GetCallBackUrlException($e->getMessage());
         }
 
+      
+        return $this->parseResponse($response);
+    }
+
+    private function parseResponse($response)
+    {
+        $response = json_decode($response);
+        if ($response) {
+            throw new GetCallBackUrlException("[]");
+        }
+        
         return $response;
     }
 }

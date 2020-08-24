@@ -46,6 +46,21 @@ class CreateToken extends BaseRepository
             throw new CreateTokenException($e->getMessage());
         }
 
-        return $response;
+        return $this->parseResponse($response);
+    }
+
+    private function parseResponse($response)
+    {
+        if ($response) {
+            if (json_decode($response)) {
+                if ($response) {
+                    throw new CreateTokenException("[] {$response}");
+                }
+                return $response;
+            }        
+            throw new CreateTokenException("[] {$response}");
+        }
+        throw new CreateTokenException("[]");
+        
     }
 }
