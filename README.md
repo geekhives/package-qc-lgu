@@ -31,19 +31,28 @@
     $client = new \Geekhives\Qclgu\Services\Clients\GetCallBackUrl;
     $response = $client->post();
 
- - Success
+- Success
 
     {
         "message": "Successfully added."
     }
 
+<h4>Create Token:</h4>
+        
+    $client = new \Geekhives\Qclgu\Services\Clients\CreateToken;
+    $response = $client->post();
+
+- Success
+
+- Error
+ 
 <h4>Inquire:</h4>
         
     $client = new \Geekhives\Qclgu\Services\Clients\Inquire;
     $referenceNo = A0-09CB8-00001;
     $response = $client->post($referenceNo);
 
- - Success
+- Success
 
     {
         "reference_number": "A0-09CB8-00001",
@@ -52,13 +61,13 @@
         "amount_to_pay": "3469.1"
     }
 
- - Error
+- Error
 
     \Geekhives\Qclgu\Services\Clients\Exceptions\InquireException()
     * message format : "[$errorCode] $errorMessage"
 
     
- - Error List
+- Error List
 
     [C1] Error during inquiry: Invalid Reference No length.
     [C2] Error during inquiry: Invalid 1st characters should be on ALPHABET FORMAT (A-Z).
@@ -76,7 +85,7 @@
     $transactionDate = A0-09CB8-00001;
     $response = $client->post($referenceNo, amountPaid, transactionDate);
 
- - Success
+- Success
 
     {
         "reference_number": "A0-09CB8-00001",
@@ -84,13 +93,13 @@
         "status_message": "Payment: Successful."
     }
 
- - Error
+- Error
 
     \Geekhives\Qclgu\Services\Clients\Exceptions\PostException()
     * message format : "[$errorCode] $errorMessage"
 
     
- - Error List
+- Error List
     [D1] Error during payment: All parameters are required.
     [D2] Error during payment: Invalid amount. 0 and negative values are not allowed.
     [D3] Error during payment: Invalid date format. Date must be on [yyyy-mm-dd] format.
