@@ -3,7 +3,6 @@ namespace Geekhives\Qclgu\Services\Clients;
 
 use Geekhives\Qclgu\Services\Base\BaseRepository;
 use Geekhives\Qclgu\Services\Helpers\CurlRequestTrait;
-use Geekhives\Qclgu\Services\Clients\Exceptions\CreateTokenException;
 use Geekhives\Qclgu\Services\Clients\Exceptions\GetCallBackUrlException;
 
 class GetCallBackUrl extends BaseRepository
@@ -16,7 +15,7 @@ class GetCallBackUrl extends BaseRepository
     {
         parent::__construct();
         if (!config('package_qc_lgu.base_url')) {
-            throw new CreateTokenException('Config base url not set.');
+            throw new GetCallBackUrlException('Config base url not set.');
         }
         $this->resource = 'get_call_back_url';
     }
@@ -26,7 +25,7 @@ class GetCallBackUrl extends BaseRepository
      * @param array $data
      * @return array
      *
-     * @throws CreateTokenException
+     * @throws GetCallBackUrlException
      */
     public function post()
     {
@@ -54,7 +53,7 @@ class GetCallBackUrl extends BaseRepository
     private function parseResponse($response)
     {
         $response = json_decode($response);
-        if ($response) {
+        if (!$response) {
             throw new GetCallBackUrlException("[]");
         }
         

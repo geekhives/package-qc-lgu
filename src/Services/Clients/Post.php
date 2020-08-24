@@ -50,8 +50,8 @@ class Post extends BaseRepository
         } catch (\Throwable $e) {
             throw new PostException($e->getMessage());
         }
+        
         return $this->parseResponse($response);
-        return $response;
     }
 
     private function getAccessToken()

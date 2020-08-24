@@ -49,7 +49,6 @@ class Inquire extends BaseRepository
         }
           
         return $this->parseResponse($response);
-        return $response;
     }
 
     private function getAccessToken()
