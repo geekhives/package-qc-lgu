@@ -52,15 +52,17 @@ class CreateToken extends BaseRepository
     private function parseResponse($response)
     {
         if ($response) {
-            if (json_decode($response)) {
+            if ($response = json_decode($response)) {
                 if ($response) {
-                    throw new CreateTokenException("[] {$response}");
+                    if ($response = json_decode($response->Response)) {
+                        if (in_array($response->status_code, ['B0', 'B1', 'B2', 'B3', 'B4', 'B5'])) {
+                            throw new CreateTokenException("[{$response->status_code}] {$response->status_message}");
+                        }
+                    }
                 }
                 return $response;
             }        
-            throw new CreateTokenException("[] {$response}");
         }
-        throw new CreateTokenException("[]");
-        
+        throw new CreateTokenException("$response");
     }
 }

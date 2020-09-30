@@ -8,16 +8,20 @@ use Geekhives\Qclgu\Services\Clients\Exceptions\PostException;
 class Post extends BaseRepository
 {
     use CurlRequestTrait;
+
+    protected $accessToken;
+
     /**
      * CashIn constructor.
      */
-    public function __construct()
+    public function __construct($accessToken)
     {
         parent::__construct();
         if (!config('package_qc_lgu.base_url')) {
             throw new PostException('Config base url not set.');
         }
         $this->resource = 'post';
+        $this->accessToken = $accessToken;
     }
     /**
      * Send the cashin to partner
@@ -32,7 +36,7 @@ class Post extends BaseRepository
     public function post($referenceNo, $amountPaid, $transactionPate)
     {
         $accessToken = $this->getAccessToken();
-        // $response =  '{"reference_number":"A0-09CB8-00001","status_code":"D0","status_message":"Payment: Successful."}';
+        
         try {
             $response = $this->curl(
                 $this->buildUrl . $this->resource,
