@@ -27,6 +27,7 @@
     PACKAGE_QC_LGU_ACCESS_TOKEN=4e44e41648cbf215aa9d55a1f00b667453fe8c69e65a21eaf0a15a0b318f8d31
 
 <h4>Get Call Back Url:</h4>    
+
     $client = new \Geekhives\Qclgu\Services\Clients\GetCallBackUrl;
     $response = $client--post();
 
@@ -40,7 +41,7 @@
     - message format : "[$errorCode] $errorMessage"
 
 <h4>Create Token:</h4>
-        
+
     $client = new \Geekhives\Qclgu\Services\Clients\CreateToken;
     $response = $client--post();
 
@@ -56,6 +57,7 @@
     - [B5] Error during request for token: Your app_id, app_secret and call_back_url does not
  
 <h4>Inquire:</h4>
+
     $accessToken = 974d7bd7731899dacccf567748fadfd6cfee9d74401dd95ed3ceffcd8957cc21;
     $client = new \Geekhives\Qclgu\Services\Clients\Inquire();
     $referenceNo = A0-09CB8-00001;
@@ -95,7 +97,6 @@
     $response = $client--post($referenceNo, amountPaid, transactionDate);
 
 - Success
-
     {
         "reference_number": "A0-09CB8-00001",
         "status_code": "D0",
