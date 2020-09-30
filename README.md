@@ -1,4 +1,4 @@
-<h1-Package Easytrip</h1-
+<h1>Package QC LGU</h1>
 
 ## Install
 - Add this to your composer.json file:
