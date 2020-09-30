@@ -36,8 +36,8 @@
     }
 
 - Error
-    \Geekhives\Qclgu\Services\Clients\Exceptions\GetCallBackUrlException()
-    message format : "[$errorCode] $errorMessage"
+    - \Geekhives\Qclgu\Services\Clients\Exceptions\GetCallBackUrlException()
+    - message format : "[$errorCode] $errorMessage"
 
 <h4>Create Token:</h4>
         
@@ -45,8 +45,8 @@
     $response = $client--post();
 
 - Error
-    \Geekhives\Qclgu\Services\Clients\Exceptions\CreateTokenException()
-    message format : "[$errorCode] $errorMessage"
+    - \Geekhives\Qclgu\Services\Clients\Exceptions\CreateTokenException()
+    - message format : "[$errorCode] $errorMessage"
 
 - Error List
     - [B1] Error during request for token: All parameters are required.
@@ -72,8 +72,8 @@
 
 - Error
 
-    \Geekhives\Qclgu\Services\Clients\Exceptions\InquireException()
-    message format : "[$errorCode] $errorMessage"
+    - \Geekhives\Qclgu\Services\Clients\Exceptions\InquireException()
+    - message format : "[$errorCode] $errorMessage"
 
     
 - Error List
@@ -104,8 +104,8 @@
 
 - Error
 
-    \Geekhives\Qclgu\Services\Clients\Exceptions\PostException()
-    message format : "[$errorCode] $errorMessage"
+    - \Geekhives\Qclgu\Services\Clients\Exceptions\PostException()
+    - message format : "[$errorCode] $errorMessage"
 
     
 - Error List
