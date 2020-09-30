@@ -14,7 +14,7 @@
     
 - Run Composer Install
 
-- Publish Config Files `php artisan vendor:publish --tag=package-qc-lgu`
+- Publish Config Files `php artisan vendor:publish ->tag=package-qc-lgu`
 
 - Done!
 
@@ -29,7 +29,7 @@
 <h4>Get Call Back Url:</h4>    
 
     $client = new \Geekhives\Qclgu\Services\Clients\GetCallBackUrl;
-    $response = $client--post();
+    $response = $client->post();
 
 - Success
     {
@@ -43,7 +43,7 @@
 <h4>Create Token:</h4>
 
     $client = new \Geekhives\Qclgu\Services\Clients\CreateToken;
-    $response = $client--post();
+    $response = $client->post();
 
 - Error
     - \Geekhives\Qclgu\Services\Clients\Exceptions\CreateTokenException()
@@ -61,8 +61,7 @@
     $accessToken = 974d7bd7731899dacccf567748fadfd6cfee9d74401dd95ed3ceffcd8957cc21;
     $client = new \Geekhives\Qclgu\Services\Clients\Inquire();
     $referenceNo = A0-09CB8-00001;
-    $response = $client--post($request--reference_no);
-    return response()--json($response);
+    $response = $client->post($request->reference_no);
 
 - Success
     {
@@ -94,7 +93,7 @@
     $referenceNo = A0-09CB8-00001;
     $amountPaid = A0-09CB8-00001;
     $transactionDate = A0-09CB8-00001;
-    $response = $client--post($referenceNo, amountPaid, transactionDate);
+    $response = $client->post($referenceNo, amountPaid, transactionDate);
 
 - Success
     {
