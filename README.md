@@ -26,34 +26,43 @@
     PACKAGE_QC_LGU_CALL_BACK_URL=https://2e5027dfdfea.ngrok.io/api/token/callback
     PACKAGE_QC_LGU_ACCESS_TOKEN=4e44e41648cbf215aa9d55a1f00b667453fe8c69e65a21eaf0a15a0b318f8d31
 
-<h4>Get Call Back Url:</h4>
-        
+<h4>Get Call Back Url:</h4>    
     $client = new \Geekhives\Qclgu\Services\Clients\GetCallBackUrl;
     $response = $client->post();
 
 - Success
-
     {
         "message": "Successfully added."
     }
+
+- Error
+    \Geekhives\Qclgu\Services\Clients\Exceptions\GetCallBackUrlException()
+    * message format : "[$errorCode] $errorMessage"
 
 <h4>Create Token:</h4>
         
     $client = new \Geekhives\Qclgu\Services\Clients\CreateToken;
     $response = $client->post();
 
-- Success
-
 - Error
+    \Geekhives\Qclgu\Services\Clients\Exceptions\CreateTokenException()
+    * message format : "[$errorCode] $errorMessage"
+
+- Error List
+    [B1] Error during request for token: All parameters are required.
+    [B2] Error during request for token: Invalid call_back_url.
+    [B3] Error during request for token: There is an existing active token for your app_id.
+    [B4] Error during request for token: Generate token is not successful.
+    [B5] Error during request for token: Your app_id, app_secret and call_back_url does not
  
 <h4>Inquire:</h4>
-        
-    $client = new \Geekhives\Qclgu\Services\Clients\Inquire;
+    $accessToken = 974d7bd7731899dacccf567748fadfd6cfee9d74401dd95ed3ceffcd8957cc21;
+    $client = new \Geekhives\Qclgu\Services\Clients\Inquire();
     $referenceNo = A0-09CB8-00001;
-    $response = $client->post($referenceNo);
+    $response = $client->post($request->reference_no);
+    return response()->json($response);
 
 - Success
-
     {
         "reference_number": "A0-09CB8-00001",
         "status_code": "A0",
@@ -68,7 +77,6 @@
 
     
 - Error List
-
     [C1] Error during inquiry: Invalid Reference No length.
     [C2] Error during inquiry: Invalid 1st characters should be on ALPHABET FORMAT (A-Z).
     [C3] Error during inquiry: 3rd and 9th character must be dash(-).
@@ -79,7 +87,8 @@
 
 <h4>Post:</h4>
         
-    $client = new \Geekhives\Qclgu\Services\Clients\Post;
+    $accessToken = 974d7bd7731899dacccf567748fadfd6cfee9d74401dd95ed3ceffcd8957cc21;
+    $client = new \Geekhives\Qclgu\Services\Clients\Post($accessToken);
     $referenceNo = A0-09CB8-00001;
     $amountPaid = A0-09CB8-00001;
     $transactionDate = A0-09CB8-00001;
