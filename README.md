@@ -60,7 +60,7 @@
 
     $accessToken = 974d7bd7731899dacccf567748fadfd6cfee9d74401dd95ed3ceffcd8957cc21;
     $client = new \Geekhives\Qclgu\Services\Clients\Inquire();
-    $referenceNo = A0-09CB8-00001;
+    $referenceNo = "A0-09CB8-00001";
     $response = $client->post($request->reference_no);
 
 - Success
@@ -90,9 +90,9 @@
         
     $accessToken = 974d7bd7731899dacccf567748fadfd6cfee9d74401dd95ed3ceffcd8957cc21;
     $client = new \Geekhives\Qclgu\Services\Clients\Post($accessToken);
-    $referenceNo = A0-09CB8-00001;
-    $amountPaid = A0-09CB8-00001;
-    $transactionDate = A0-09CB8-00001;
+    $referenceNo = "A0-09CB8-00001";
+    $amountPaid = 3489.1;
+    $transactionDate = '2020-03-25';
     $response = $client->post($referenceNo, amountPaid, transactionDate);
 
 - Success
